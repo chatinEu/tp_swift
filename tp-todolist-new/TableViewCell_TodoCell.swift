@@ -11,7 +11,6 @@ class TableViewCell_TodoCell: UITableViewCell {
 
     @IBOutlet weak var Label_Title: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,6 +20,10 @@ class TableViewCell_TodoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func importData(data: TodoCellData){
+        Label_Title.text = data.title
     }
 
 }
