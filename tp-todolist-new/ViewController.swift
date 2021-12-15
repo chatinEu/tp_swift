@@ -12,7 +12,7 @@ class ViewController: UIViewController,UITableViewDataSource {
     @IBOutlet weak var tableView_TodoList: UITableView!
     
     var TodoCellList = [TodoCellData]()
-    
+    var lastIndexSelected = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,23 +48,52 @@ class ViewController: UIViewController,UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? ViewControllerTodoDetail{
-            let selectedRow = tableView_TodoList.indexPathForSelectedRow!.row
-            controller.data = TodoCellList[selectedRow]
+            lastIndexSelected = tableView_TodoList.indexPathForSelectedRow!.row
+            controller.data = TodoCellList[lastIndexSelected]
         }
+        
+    }
+    
+    /*
+     update data from detail page
+     */
+    @IBAction func backToMe(_ unwindSegue: UIStoryboardSegue) {
+        print("back to me")
+        if let sourceViewController = unwindSegue.source as? ViewControllerTodoDetail {
+            let updatedData = TodoCellList[lastIndexSelected]
+            
+            updatedData.title = sourceViewController.titleTextView.text
+            updatedData.description = sourceViewController.descriptionTextView.text
+        }
+        // Use data from the view controller which initiated the unwind segue
+        
+        tableView_TodoList.reloadData()
     }
     
     
+    /*
+     unwind segue from addTask panel
+     */
+    @IBAction func addTask(_ unwindSegue: UIStoryboardSegue) {
+        print("back to me")
+        if let sourceViewController = unwindSegue.source as? ViewControllerAddTask {
+            let data = TodoCellData(title: sourceViewController.titleTextField.text!, desc: sourceViewController.descriptionTextField.text!)
+            TodoCellList.append(data)
+        }
+        tableView_TodoList.reloadData()
+    }
     
+    
+    /*
     override func beginAppearanceTransition(_ isAppearing: Bool, animated: Bool) {
         tableView_TodoList.reloadData()
         print("reloading")
     }
-    
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView_TodoList.reloadData()
-    }
+    }*/
 
 }
 

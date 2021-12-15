@@ -28,19 +28,38 @@ class ViewControllerTodoDetail: UIViewController {
         else{
             titleTextView.text = "nothing to see here"
         }
+        print("detail")
     }
     
     
+    
+    
+
+    
+    /*
     @IBAction func confirmModifButton(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
+        print("dismiss")
+        if let vc = unwindSegue.destination as? ViewController {
+            if let cellData = data {
+                
+                
+                data!.title = titleTextView.text
+                data!.description = descriptionTextView.text
+            }
+        }
         if dataReady{
             
             dataReady = false
             data!.title = titleTextView.text
             data!.description = descriptionTextView.text
         }
+        
+        let sourceViewController = unwindSegue.destination
+        dismiss(animated: true, completion: nil)
         // Use data from the view controller which initiated the unwind segue
     }
+    */
+    
     
     /*@IBAction func confirmModifButton(_ sender: Any) {
         
