@@ -11,11 +11,15 @@ class ViewControllerAddTask: UIViewController {
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var switchTimeLimit: UISwitch!
     
+    @IBAction func onTimeLimitSwitched(_ sender: Any) {
+        datePicker.isEnabled = !switchTimeLimit.isOn
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        datePicker.isEnabled = !switchTimeLimit.isOn
     }
     
 

@@ -12,6 +12,7 @@ class ViewControllerTodoDetail: UIViewController {
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var checkboxButton: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var data: TodoCellData?
     var dataReady = false
@@ -24,6 +25,12 @@ class ViewControllerTodoDetail: UIViewController {
             dataReady = true
             titleTextView.text = todoTask.title
             descriptionTextView.text = todoTask.description
+            
+            //show date picker if task has a date limit
+            if let date = todoTask.date {
+                datePicker.isHidden = false
+                datePicker.date = date
+            }
         }
         else{
             titleTextView.text = "nothing to see here"
